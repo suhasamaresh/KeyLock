@@ -1,8 +1,6 @@
 use axum::{extract::State, Json};
 use crate::{
-    crypto::CryptoService,
     db::{models::*, schema::secrets::dsl::*},
-    config::establish_connection,
     error::AppError,
     utils::{generate_id, calculate_expiry},
 };
