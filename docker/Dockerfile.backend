@@ -10,17 +10,18 @@ WORKDIR /app/backend
 RUN cargo build --release
 
 FROM debian:bookworm-slim
+
 WORKDIR /app
 
 RUN apt-get update && \
     apt-get install -y libssl3 ca-certificates sqlite3 && \
     rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /app/data
+RUN mkdir -p /backend
 
-COPY --from=builder /app/backend/target/release/keylock-backend /usr/local/bin/
+COPY --from=builder /app/backend/target/release/keylock-backend /usr/local/bin/keylock-backend
 
-ENV DATABASE_URL=sqlite:/backend/secrets.db
+RUN chmod +x /usr/local/bin/keylock-backend
 
 EXPOSE 3001
 

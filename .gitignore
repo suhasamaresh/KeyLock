@@ -28,6 +28,9 @@ frontend/out/
 # production
 frontend/build
 
+.gitignore
+.dockerignore
+
 # misc
 frontend/.DS_Store
 frontend/*.pem
