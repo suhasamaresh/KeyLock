@@ -1,26 +1,27 @@
-#step 1: build
 FROM rust:latest AS builder
 
 WORKDIR /app
 
-
-COPY backend/Cargo.toml backend/Cargo.lock ./
+COPY backend/Cargo.toml backend/Cargo.lock ./backend/
 COPY backend ./backend
 
-
 WORKDIR /app/backend
+
 RUN cargo build --release
 
-#step2: Ruuntime image
 FROM debian:bookworm-slim
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y libssl3 ca-certificates sqlite3 && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y libssl3 ca-certificates sqlite3 && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /app/data
 
 COPY --from=builder /app/backend/target/release/keylock-backend /usr/local/bin/
 
+ENV DATABASE_URL=sqlite:/app/data/secrets.db
+
 EXPOSE 3001
 
-CMD [ "keylock-backend" ]
+CMD ["keylock-backend"]

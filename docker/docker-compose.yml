@@ -11,5 +11,5 @@ services:
     volumes:
       - ./backend/data:/app/data
     environment:
-      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_URL=sqlite:/app/data/secrets.db
     restart: unless-stopped
