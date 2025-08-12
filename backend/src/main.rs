@@ -15,11 +15,16 @@ use crate::crypto::CryptoService;
 use crate::config::establish_connection;
 use crate::routes::AppState;
 use std::sync::{Arc, Mutex};
+use tokio_cron_scheduler::{JobScheduler, Job};
+use crate::db::cleanup::cleanup_expired_records;
 
 #[tokio::main]
 async fn main() {
+    let sched = JobScheduler::new().await.unwrap();
+
     let db_conn = establish_connection();
     let db_conn = Arc::new(Mutex::new(db_conn));
+    let db_pool = db_conn.clone();
 
     let state = AppState {
         crypto: CryptoService::new(),
@@ -36,6 +41,20 @@ async fn main() {
         .route("/api/secret/{id}", get(get_secret))
         .with_state(state)
         .layer(cors);
+
+    
+    sched.add(
+        Job::new_async("0 0 0 * * 0", {
+            let db_pool = db_pool.clone();
+            move |_uuid, _| {
+                let db_pool = db_pool.clone();
+                Box::pin(async move{
+                    println!("Hi deleting expired records");
+                    cleanup_expired_records(db_pool).await;
+                })
+            }
+        }).unwrap()
+    ).await.unwrap();
 
     let listener = tokio::net::TcpListener::bind("127.0.0.1:3001").await.unwrap();
     axum::serve(listener, app).await.unwrap();
