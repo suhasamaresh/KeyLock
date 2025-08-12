@@ -22,6 +22,9 @@ RUN mkdir -p /backend
 COPY --from=builder /app/backend/target/release/keylock-backend /usr/local/bin/keylock-backend
 COPY --from=builder /usr/local/cargo/bin/diesel /usr/local/bin/diesel
 
+COPY backend/diesel.toml /backend/diesel.toml
+COPY backend/migrations /backend/migrations
+
 RUN chmod +x /usr/local/bin/keylock-backend
 RUN chmod +x /usr/local/bin/diesel
 
