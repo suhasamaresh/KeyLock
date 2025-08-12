@@ -1,20 +1,19 @@
 [phases.setup]
 nixPkgs = [
     "postgresql",
-    "pkg-config",
+    "pkg-config", 
     "openssl"
 ]
 
-[phases.build] 
+[phases.build]
 cmds = [
     "cd backend",
-    "cargo build --release --bin keylock-backend"
+    "cargo build --release --target x86_64-unknown-linux-gnu --bin keylock-backend"
 ]
 
-
 [start]
-cmd = "cd backend && ./target/release/keylock-backend"
+cmd = "cd backend && ./target/x86_64-unknown-linux-gnu/release/keylock-backend"
 
 [variables]
-PORT = "3001"
+CARGO_BUILD_TARGET = "x86_64-unknown-linux-gnu"
 RUST_LOG = "info"
