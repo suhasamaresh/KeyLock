@@ -2,6 +2,10 @@ FROM rust:latest AS builder
 
 WORKDIR /app
 
+RUN apt-get update && \
+    apt-get install -y libpq-dev pkg-config && \
+    rm -rf /var/lib/apt/lists/*
+
 COPY backend/Cargo.toml backend/Cargo.lock ./backend/
 COPY backend ./backend
 
