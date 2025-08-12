@@ -17,6 +17,8 @@ pub async fn get_secret(
 
     let mut conn = state.db.lock().map_err(|_| AppError::Internal("Failed to lock database".into()))?;
 
+    let _ = diesel::sql_query("DEALLOCATE ALL").execute(&mut *conn);
+    
     let secret_record = secrets
         .filter(id.eq(&secret_id))
         .select(Secret::as_select())
