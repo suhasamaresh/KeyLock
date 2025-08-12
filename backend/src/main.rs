@@ -42,6 +42,7 @@ async fn main() {
         ]);
 
     let app = Router::new()
+        .route("/", get(health_check))
         .route("/api/share", post(share_secret))
         .route("/api/secret/{id}", get(get_secret))
         .with_state(state)
@@ -72,4 +73,9 @@ async fn main() {
     let address = format!("0.0.0.0:{}", port);
     let listener = tokio::net::TcpListener::bind(&address).await.unwrap();
     axum::serve(listener, app).await.unwrap();
+}
+
+
+async fn health_check() -> &'static str {
+    "KeyLock API is running"
 }

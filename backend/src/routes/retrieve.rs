@@ -15,13 +15,25 @@ pub async fn get_secret(
 ) -> Result<Json<serde_json::Value>, AppError> {
     use crate::db::schema::secrets::dsl::*;
 
-    let mut conn = state.db.lock().unwrap();
-    
+    let mut conn = state.db.lock().map_err(|_| AppError::Internal("Failed to lock database".into()))?;
+
     let secret_record = secrets
         .filter(id.eq(&secret_id))
         .select(Secret::as_select())
         .first::<Secret>(&mut *conn)
-        .map_err(|_| AppError::NotFound)?;
+        .map_err(|e| {
+            println!("Database query error: {:?}", e);
+            match e {
+                diesel::result::Error::NotFound => {
+                    println!(" Secret not found in database for ID: {}", secret_id);
+                    AppError::NotFound
+                }
+                _ => {
+                    println!(" Database error: {}", e);
+                    AppError::Internal(format!("Database error: {}", e))
+                }
+            }
+        })?;
 
     
     let expires_at_utc: DateTime<Utc> = Utc.from_utc_datetime(&secret_record.expires_at);

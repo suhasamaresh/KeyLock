@@ -106,7 +106,7 @@ async function shareSecret(
     });
 
     console.log("Attempting to connect to backend...");
-    const response = await fetch("https://keylock-1.onrender.com/api/share", {
+    const response = await fetch("https://keylock.onrender.com/api/share", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

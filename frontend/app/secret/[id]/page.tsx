@@ -15,7 +15,7 @@ export default function SecretPage(){
     useEffect (() =>{
         if(!id) return;
 
-        fetch(`https://keylock-1.onrender.com/api/secret/${id}`)
+        fetch(`https://cooperative-transformation-production.up.railway.app/api/secret/${id}`)
     .then(res => {
         if (!res.ok) {
             throw new Error('Secret not found or expired');
