@@ -1,9 +1,12 @@
 [phases.setup]
 nixPkgs = [
+    "rustc",
+    "cargo", 
     "postgresql",
     "pkg-config", 
     "openssl",
-    "gcc"
+    "gcc",
+    "libc6-dev"
 ]
 
 [phases.build]
