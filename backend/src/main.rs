@@ -23,16 +23,15 @@ use tokio::time::sleep;
 async fn main() {
     let sched = JobScheduler::new().await.unwrap();
 
-    let mut db_conn = None;
+    let db_conn = None;
     for attempt in 1..=10 {
         println!("Attempting to connect to the database (attempt {}/10)...", attempt);
-        db_conn = Some(establish_connection());
+        establish_connection();
         if db_conn.is_some() {
             break;
         }
         sleep(Duration::from_secs(3)).await;
     }
-    
     let db_conn = Arc::new(Mutex::new(db_conn.expect("Failed to establish database connection after 10 attempts")));
     let db_pool = db_conn.clone();
 

@@ -30,5 +30,4 @@ RUN chmod +x /usr/local/bin/diesel
 
 EXPOSE 3001
 
-CMD ["/bin/bash", "-c", "cd /backend && echo 'Setting up database...' && diesel setup && echo 'Running migrations...' && diesel migration run && echo 'Database ready, starting backend...' && sleep 2 && keylock-backend"]
-
+CMD ["/bin/bash", "-c", "cd /backend && diesel setup && diesel migration run && sleep 5 && keylock-backend"]
