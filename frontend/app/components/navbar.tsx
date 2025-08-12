@@ -7,7 +7,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className="w-full sticky top-0 z-50"
+      className="w-full sticky top-0 z-50 "
       style={{ backgroundColor: "#16161a" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px6 lg:px-8">
@@ -20,7 +20,7 @@ const Navbar = () => {
               style={{ color: "#fffffe" }}
             >
               {" "}
-              LOGO
+              KEYLOCK
             </a>
           </div>
           <a

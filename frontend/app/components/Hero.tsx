@@ -79,15 +79,13 @@ const MovingBorder = ({
         />
       </svg>
       <motion.div
-        style={
-          {
-            position: "absolute",
-            top: 0,
-            left: 0,
-            display: "inline-block",
-            transform,
-          } as React.CSSProperties
-        }
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          display: "inline-block",
+          transform,
+        }}
       >
         {children}
       </motion.div>
@@ -108,7 +106,7 @@ async function shareSecret(
     });
 
     console.log("Attempting to connect to backend...");
-    const response = await fetch("http://localhost:3001/api/share", {
+    const response = await fetch("https://keylock-1.onrender.com/api/share", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

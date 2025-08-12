@@ -78,15 +78,15 @@ const MovingBorder = ({
         />
       </svg>
       <motion.div
-        style={
-          {
-            position: "absolute",
-            top: 0,
-            left: 0,
-            display: "inline-block",
-            transform,
-          } as React.CSSProperties
-        }
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          display: "inline-block",
+          // other CSS properties here
+          // transform will be merged below
+          ...{ transform },
+        }}
       >
         {children}
       </motion.div>

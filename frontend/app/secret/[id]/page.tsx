@@ -15,21 +15,25 @@ export default function SecretPage(){
     useEffect (() =>{
         if(!id) return;
 
-        fetch(`http://localhost:3001/api/secret/${id}`)
-           .then(res => {
-            if(!res.ok){
-                throw new Error('Secret not found or expired');
-            }
-            return res.json();
-           })
-           .then(data => {
-            setSecret(data.secret);
-            setLoading(false);;
-           })
-           .catch(err => {
-            setError(err.message);
-            setLoading(false);
-           });
+        fetch(`https://keylock-1.onrender.com/api/secret/${id}`)
+    .then(res => {
+        if (!res.ok) {
+            throw new Error('Secret not found or expired');
+        }
+        return res.json();
+    })
+    .then(data => {
+        console.log("Backend response:", data); 
+        const secretContent = data.secret || data.content || data.message || data;
+        
+        setSecret(secretContent);
+        setLoading(false);
+    })
+    .catch(err => {
+        setError(err.message);
+        setLoading(false);
+    });
+
     }, [id]);
 
     const copyToClipboard = async () =>{
