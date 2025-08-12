@@ -9,7 +9,7 @@ services:
     ports:
       - "3001:3001"
     volumes:
-      - ./backend/data:/app/data
+      - ./backend:/backend 
     environment:
       - DATABASE_URL=sqlite:/app/data/secrets.db
     restart: unless-stopped
