@@ -1,0 +1,19 @@
+[phases.setup]
+nixPkgs = [
+    "postgresql",
+    "pkg-config", 
+    "openssl",
+    "gcc"
+]
+
+[phases.build]
+dependsOn = ["setup"]
+cmds = [
+    "cargo build --release --bin keylock-backend"
+]
+
+[start]
+cmd = "./target/release/keylock-backend"
+
+[variables]
+RUST_LOG = "info"
