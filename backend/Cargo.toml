@@ -8,7 +8,7 @@ axum = "0.8.4"
 tokio = { version = "1.0", features = ["full"] }
 tower = "0.5.2"
 tower-http = { version = "0.6.6", features = ["cors", "fs"] }
-diesel = { version = "2.2.12", features = ["sqlite", "chrono"] }
+diesel = { version = "2.2.12", features = ["postgres", "chrono"] }
 libsqlite3-sys = { version = "0.35.0", features = ["bundled"] }
 aes-gcm = "0.10"
 serde = { version = "1.0", features = ["derive"] }

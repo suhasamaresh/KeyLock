@@ -2,8 +2,6 @@ FROM rust:latest AS builder
 
 WORKDIR /app
 
-RUN cargo install diesel_cli --no-default-features --features sqlite
-
 COPY backend/Cargo.toml backend/Cargo.lock ./backend/
 COPY backend ./backend
 
@@ -14,20 +12,13 @@ FROM debian:bookworm-slim
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get install -y libssl3 ca-certificates sqlite3 && \
+    apt-get install -y libssl3 ca-certificates libpq5 && \
     rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /backend
-
 COPY --from=builder /app/backend/target/release/keylock-backend /usr/local/bin/keylock-backend
-COPY --from=builder /usr/local/cargo/bin/diesel /usr/local/bin/diesel
-
-COPY backend/diesel.toml /backend/diesel.toml
-COPY backend/migrations /backend/migrations
 
 RUN chmod +x /usr/local/bin/keylock-backend
-RUN chmod +x /usr/local/bin/diesel
 
 EXPOSE 3001
 
-CMD ["/bin/bash", "-c", "cd /backend && diesel setup && diesel migration run && sleep 5 && keylock-backend"]
+CMD ["keylock-backend"]

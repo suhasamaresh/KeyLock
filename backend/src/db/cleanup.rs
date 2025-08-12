@@ -3,7 +3,7 @@ use diesel::prelude::*;
 use crate::db::schema::secrets::dsl::*;
 use std::sync::{Arc, Mutex};
 
-pub async fn cleanup_expired_records(db_pool: Arc<Mutex<SqliteConnection>>) {
+pub async fn cleanup_expired_records(db_pool: Arc<Mutex<PgConnection>>) {
     let db = db_pool.clone();
     tokio::task::spawn_blocking(move || {
         let now = Utc::now().naive_utc();

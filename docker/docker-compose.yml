@@ -8,8 +8,6 @@ services:
     container_name: keylock-backend
     ports:
       - "3001:3001"
-    volumes:
-      - ../backend:/backend
     environment:
       - DATABASE_URL=${DATABASE_URL}
     restart: unless-stopped
