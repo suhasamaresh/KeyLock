@@ -3,23 +3,24 @@ FROM rust:latest AS builder
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get install -y libpq-dev pkg-config && \
+    apt-get install -y libpq-dev pkg-config libssl-dev build-essential && \
     rm -rf /var/lib/apt/lists/*
 
 COPY backend/Cargo.toml backend/Cargo.lock ./backend/
 COPY backend ./backend
 
 WORKDIR /app/backend
-RUN cargo build --release
 
-FROM debian:bookworm-slim
+RUN cargo build --release --target x86_64-unknown-linux-gnu
+
+FROM debian:bookworm-slim AS runtime
 WORKDIR /app
 
 RUN apt-get update && \
     apt-get install -y libssl3 ca-certificates libpq5 && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /app/backend/target/release/keylock-backend /usr/local/bin/keylock-backend
+COPY --from=builder /app/backend/target/x86_64-unknown-linux-gnu/release/keylock-backend /usr/local/bin/keylock-backend
 
 RUN chmod +x /usr/local/bin/keylock-backend
 
