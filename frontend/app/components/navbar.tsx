@@ -24,7 +24,7 @@ const Navbar = () => {
             </a>
           </div>
           <a
-            href="https://github.com/username/repo"
+            href="https://github.com/suhasamaresh/KeyLock"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-md hover:opacity-70 transition-opacity duration-200"

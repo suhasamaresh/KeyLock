@@ -1,7 +1,9 @@
 backend/secrets.db
 backend/.env
+backend/data/
 
 target/
+.env
 
 frontend/node_modules/
 frontend/package-lock.json
