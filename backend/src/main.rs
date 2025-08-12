@@ -14,16 +14,26 @@ use crate::routes::{share::share_secret, retrieve::get_secret};
 use crate::crypto::CryptoService;
 use crate::config::establish_connection;
 use crate::routes::AppState;
-use std::sync::{Arc, Mutex};
+use std::{sync::{Arc, Mutex}, time::Duration};
 use tokio_cron_scheduler::{JobScheduler, Job};
 use crate::db::cleanup::cleanup_expired_records;
+use tokio::time::sleep;
 
 #[tokio::main]
 async fn main() {
     let sched = JobScheduler::new().await.unwrap();
 
-    let db_conn = establish_connection();
-    let db_conn = Arc::new(Mutex::new(db_conn));
+    let mut db_conn = None;
+    for attempt in 1..=10 {
+        println!("Attempting to connect to the database (attempt {}/10)...", attempt);
+        db_conn = Some(establish_connection());
+        if db_conn.is_some() {
+            break;
+        }
+        sleep(Duration::from_secs(3)).await;
+    }
+    
+    let db_conn = Arc::new(Mutex::new(db_conn.expect("Failed to establish database connection after 10 attempts")));
     let db_pool = db_conn.clone();
 
     let state = AppState {
