@@ -28,7 +28,7 @@ pub async fn share_secret(State(state): State<AppState>, Json(payload): Json<Sha
         max_views: payload.max_views.unwrap_or(1),
     };
 
-    let mut conn = state.db.lock().unwrap();
+    let mut conn = state.db.get().unwrap();
 
     diesel::insert_into(secrets)
         .values(new_secret)

@@ -143,11 +143,11 @@ const ShareLinkModal: React.FC<ShareLinkModalProps> = ({ url, onClose }) => {
                     width: "150px",
                     height: "6px",
                     background:
-                      "linear-gradient(90deg, rgba(127,90,240,0) 0%, rgba(127,90,240,0.3) 30%, rgba(127,90,240,0.8) 70%, #7f5af0 90%, #ffffff 100%)",
-                    filter: "drop-shadow(0 0 8px #7f5af0) blur(0.3px)",
+                      "linear-gradient(90deg, rgba(249,225,22,0) 0%, rgba(249,225,22,0.3) 30%, rgba(249,225,22,0.8) 70%, #F97316 90%, #ffffff 100%)",
+                    filter: "drop-shadow(0 0 8px #F97316) blur(0.3px)",
                     borderRadius: "0px",
                     opacity: 0.9,
-                    boxShadow: "0 0 20px #7f5af0",
+                    boxShadow: "0 0 20px #F97316",
                     clipPath: "polygon(0% 50%, 30% 20%, 70% 10%, 100% 0%, 100% 100%, 70% 90%, 30% 80%)",
                     transformOrigin: "center",
                   }}
@@ -217,7 +217,7 @@ const ShareLinkModal: React.FC<ShareLinkModalProps> = ({ url, onClose }) => {
                       onClick={copyToClipboard}
                       className="flex-1 py-3 px-4 rounded-xl font-semibold text-sm transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-300 focus:ring-opacity-50"
                       style={{
-                        backgroundColor: "#7f5af0",
+                        backgroundColor: "#F97316",
                         color: "#fffffe",
                       }}
                     >

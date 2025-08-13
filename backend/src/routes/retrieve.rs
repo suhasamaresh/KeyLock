@@ -15,7 +15,7 @@ pub async fn get_secret(
 ) -> Result<Json<serde_json::Value>, AppError> {
     use crate::db::schema::secrets::dsl::*;
 
-    let mut conn = state.db.lock().map_err(|_| AppError::Internal("Failed to lock database".into()))?;
+    let mut conn = state.db.get().map_err(|_| AppError::Internal("Failed to get database connection".into()))?;
 
     let _ = diesel::sql_query("DEALLOCATE ALL").execute(&mut *conn);
     

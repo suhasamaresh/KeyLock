@@ -1,8 +1,11 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&display=swap");
+
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --caret-color: #2cb67d;
 }
 
 @theme inline {
@@ -23,4 +26,70 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  cursor: none;
+}
+
+input,
+textarea {
+  caret-color: var(--caret-color); 
+  cursor: none; 
+}
+
+a{
+  cursor: none;
+}
+
+button{
+  cursor: none;
+}
+
+.hero-bg {
+  background-color: #16161a;
+}
+
+.hero-title {
+  color: #fffffe;
+}
+
+.hero-desc {
+  color: #94a1b2;
+}
+
+.hero-card {
+  border-radius: 1.75rem;
+}
+
+.hero-card-inner {
+  border-radius: calc(1.75rem * 0.96);
+}
+
+.moving-border-bar {
+  width: 200px;
+  height: 8px;
+  background: linear-gradient(90deg, rgba(127,90,240,0) 0%, rgba(127,90,240,0.1) 20%, rgba(127,90,240,0.4) 40%, rgba(127,90,240,0.7) 60%, #7f5af0 80%, #a855f7 90%, #ffffff 100%);
+  filter: drop-shadow(0 0 12px #7f5af0) drop-shadow(0 0 20px #7f5af0) blur(0.5px);
+  border-radius: 0px;
+  opacity: 0.95;
+  box-shadow: 0 0 25px #7f5af0, 0 0 50px #7f5af0;
+  clip-path: polygon(0% 50%, 20% 20%, 80% 5%, 100% 0%, 100% 100%, 80% 95%, 20% 80%);
+  transform-origin: center;
+}
+
+.hero-form {
+  background-color: rgba(255, 255, 254, 0.05);
+  border-radius: calc(1.75rem * 0.96);
+}
+
+.hero-input {
+  background-color: rgba(255, 255, 254, 0.05);
+}
+
+.hero-btn {
+  background-color: #7f5af0;
+  color: #fffffe;
+}
+
+@theme inline {
+  --font-oxanium: var(--font-oxanium), sans-serif;
+  --font-merriweather: 'Merriweather', serif;
 }

@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { ReactNode } from "react";
 import ShareLinkModal from "./ShareLinkModal";
+import { Lock } from "lucide-react";
 
 const MovingBorder = ({
   children,
@@ -186,38 +187,64 @@ export default function Hero() {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#16161a" }}>
+    <div
+      className="min-h-screen"
+      style={{
+        background: `
+      linear-gradient(180deg, 
+          #1C1917 0%, 
+          #292524 25%, 
+          #1C1917 50%, 
+          #0C0A09 75%, 
+          #000000 100%
+        )`,
+      }}
+    >
       <div className="container mx-auto px-6 py-12 lg:py-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-7xl mx-auto">
           <div className="space-y-8">
+            <div className="py-2 px-4 bg-[#57534E] text-[#F5F5F4] rounded-full inline-block border border-[#F97316]">
+              <span className="bg-[#F97316] text-[#F5F5F4] rounded-full  inline-block mr-2">
+                ✦
+              </span>
+              Transfer safely
+            </div>
             <h1
-              className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight"
-              style={{ color: "#fffffe" }}
+              className="text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight"
+              style={{ color: "#F5F5F4" }}
             >
-              KeyLock Secret Retrieval Flow
+              <span className="font-oxanium font-bold"> KeyLock</span>
+              <span className="italic font-[var(--font-merriweather)] text-[#F97316]">
+                {" "}
+                Secret{" "}
+              </span>
+              <br />
+              <span className="inline-flex items-center gap-2 font-bold">
+                <span style={{
+                  color: "#F97316",
+                }}>
+                <Lock size={42} className="inline-block align-middle" />
+                <span>Retrieval</span></span>
+                <span>Flow</span>
+              </span>
             </h1>
 
             <p
               className="text-lg md:text-xl leading-relaxed font-medium max-w-2xl"
-              style={{ color: "#94a1b2" }}
+              style={{ color: "#A8A29E" }}
             >
-              A secure, step-by-step process showing how KeyLock retrieves and
-              delivers a secret — from fetching the encrypted data in SQLite,
-              decrypting it through the backend's AES‑256‑GCM encryption engine,
-              and sending the plaintext back to the React frontend for display,
-              ensuring keys never leave the backend and data stays protected
-              until final delivery.
+              Experience next-level security—KeyLock encrypts your data with the power and speed of Rust.
             </p>
           </div>
 
-          <div className="flex justify-center lg:justify-end">
+          <div className="flex justify-center lg:justify-end cursor-none">
             <div className="w-full max-w-md">
               <div
                 className="relative overflow-hidden p-[1px]"
                 style={{ borderRadius: "1.75rem" }}
               >
                 <div
-                  className="absolute inset-0"
+                  className="absolute inset-0 bg-[#292524]"
                   style={{ borderRadius: "calc(1.75rem * 0.96)" }}
                 >
                   <MovingBorder duration={4000}>
@@ -226,12 +253,12 @@ export default function Hero() {
                         width: "200px",
                         height: "8px",
                         background:
-                          "linear-gradient(90deg, rgba(127,90,240,0) 0%, rgba(127,90,240,0.1) 20%, rgba(127,90,240,0.4) 40%, rgba(127,90,240,0.7) 60%, #7f5af0 80%, #a855f7 90%, #ffffff 100%)",
+                          "linear-gradient(90deg, rgba(249,225,22,0) 0%, rgba(249,225,22,0.1) 20%, rgba(249,225,22,0.4) 40%, rgba(249,225#F97316,0.7) 60%, #F5F5F4 80%, #F5F5F4 90%, #F5F5F4 100%)",
                         filter:
-                          "drop-shadow(0 0 12px #7f5af0) drop-shadow(0 0 20px #7f5af0) blur(0.5px)",
+                          "drop-shadow(0 0 12px #F97316) drop-shadow(0 0 20px #F97316) blur(0.5px)",
                         borderRadius: "0px",
                         opacity: 0.95,
-                        boxShadow: "0 0 25px #7f5af0, 0 0 50px #7f5af0",
+                        boxShadow: "0 0 25px #F97316, 0 0 50px #F97316",
                         clipPath:
                           "polygon(0% 50%, 20% 20%, 80% 5%, 100% 0%, 100% 100%, 80% 95%, 20% 80%)",
                         transformOrigin: "center",
@@ -242,7 +269,7 @@ export default function Hero() {
 
                 <div
                   className="relative backdrop-blur-sm p-8 shadow-2xl 
-                   h-full w-full border border-gray-700"
+             h-full w-full border border-[#44403C] cursor-none"
                   style={{
                     backgroundColor: "rgba(255, 255, 254, 0.05)",
                     borderRadius: "calc(1.75rem * 0.96)",
@@ -255,7 +282,7 @@ export default function Hero() {
                         placeholder="Input the secret message here"
                         value={secretMessage}
                         onChange={(e) => setSecretMessage(e.target.value)}
-                        className="w-full px-4 py-4 rounded-xl border border-opacity-20 border-gray-800 bg-transparent text-white placeholder-gray-400 focus:outline-none focus:border-opacity-50 focus:border-purple-400 transition-all duration-300 text-lg"
+                        className="w-full px-4 py-4 rounded-md border border-opacity-20 border-[#44403C] bg-transparent text-white placeholder-gray-400 focus:outline-none focus:border-opacity-50 focus:border-[#F97316] transition-all duration-300 text-lg"
                         style={{ backgroundColor: "rgba(255, 255, 254, 0.05)" }}
                       />
                     </div>
@@ -267,7 +294,7 @@ export default function Hero() {
                           placeholder="Expiry (minutes)"
                           value={expiryMinutes}
                           onChange={(e) => setExpiryMinutes(e.target.value)}
-                          className="w-full px-4 py-4 rounded-xl border border-opacity-20 border-gray-800 bg-transparent text-white placeholder-gray-400 focus:outline-none focus:border-opacity-50 focus:border-purple-400 transition-all duration-300 text-lg"
+                          className="w-full px-4 py-4 rounded-md border border-opacity-20 border-[#44403C] bg-transparent text-white placeholder-gray-400 focus:outline-none focus:border-opacity-50 focus:border-[#F97316] transition-all duration-300 text-lg"
                           style={{
                             backgroundColor: "rgba(255, 255, 254, 0.05)",
                           }}
@@ -279,25 +306,26 @@ export default function Hero() {
                           placeholder="Max views"
                           value={maxViews}
                           onChange={(e) => setMaxViews(e.target.value)}
-                          className="w-full px-4 py-4 rounded-xl border border-opacity-20 border-gray-800 bg-transparent text-white placeholder-gray-400 focus:outline-none focus:border-opacity-50 focus:border-purple-400 transition-all duration-300 text-lg"
+                          className="w-full px-4 py-4 rounded-md border border-opacity-20 border-[#44403C] bg-transparent text-white placeholder-gray-400 focus:outline-none focus:border-opacity-50 focus:border-[#F97316] transition-all duration-300 text-lg"
                           style={{
                             backgroundColor: "rgba(255, 255, 254, 0.05)",
                           }}
                         />
                       </div>
                     </div>
-
-                    <button
-                      onClick={handleGetShareableLink}
-                      disabled={isLoading}
-                      className="w-full hover:cursor-pointer py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl active:scale-95 focus:outline-none focus:ring-4 focus:ring-purple-300 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                      style={{
-                        backgroundColor: "#7f5af0",
-                        color: "#fffffe",
-                      }}
-                    >
-                      {isLoading ? "Creating Link..." : "Get Shareable Link"}
-                    </button>
+                    <div>
+                      <button
+                        onClick={handleGetShareableLink}
+                        disabled={isLoading}
+                        className="w-full py-4 px-6 rounded-md text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl active:scale-95 focus:outline-none focus:ring-4 focus:ring-purple-300 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                        style={{
+                          backgroundColor: "#F97316",
+                          color: "#F5F5F4",
+                        }}
+                      >
+                        {isLoading ? "Creating Link... " : "Get Shareable Link"}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

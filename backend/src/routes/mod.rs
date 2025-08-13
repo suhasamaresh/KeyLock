@@ -1,11 +1,10 @@
-use std::sync::{Arc, Mutex};
-use diesel::pg::PgConnection;
 use crate::crypto::CryptoService;
+use crate::config::DbPool;
 
 #[derive(Clone)]
 pub struct AppState {
     pub crypto: CryptoService,
-    pub db: Arc<Mutex<PgConnection>>,
+    pub db: DbPool,
 }
 
 pub mod share;

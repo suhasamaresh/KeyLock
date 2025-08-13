@@ -12,7 +12,7 @@ mod error;
 mod routes;
 mod utils;
 
-use crate::config::establish_connection;
+use crate::config::establish_connection_pool;
 use crate::crypto::CryptoService;
 use crate::db::cleanup::cleanup_expired_records;
 use crate::routes::AppState;
@@ -24,8 +24,7 @@ use tokio_cron_scheduler::{Job, JobScheduler};
 async fn main() {
     let sched = JobScheduler::new().await.unwrap();
 
-    let db_conn = establish_connection().unwrap();
-    let db_conn = Arc::new(Mutex::new(db_conn));
+    let db_conn = establish_connection_pool().unwrap();
     let db_pool = db_conn.clone();
 
     let state = AppState {

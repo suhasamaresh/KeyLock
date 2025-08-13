@@ -1,14 +1,13 @@
 "use client";
-import React, { useState } from "react";
-import { Menu, X, Github } from "lucide-react";
+import React from "react";
+import { Github } from "lucide-react";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav
       className="w-full sticky top-0 z-50 "
-      style={{ backgroundColor: "#16161a" }}
+      style={{ backgroundColor: "#1C1917" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -28,7 +27,7 @@ const Navbar = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-md hover:opacity-70 transition-opacity duration-200"
-            style={{ color: "#fffffe" }}
+            style={{ color: "#F97316" }}
             aria-label="GitHub Repository"
           >
             <Github className="h-6 w-6" />

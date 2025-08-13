@@ -2,6 +2,21 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar";
+import CustomCursor from "./components/customcursor";
+import { Oxanium, Merriweather } from "next/font/google";
+
+const oxanium = Oxanium({
+  subsets: ["latin"],
+  weight: ["400", "700"], 
+  variable: "--font-oxanium", 
+});
+
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"], 
+  display: "swap",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +43,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <CustomCursor stroke="#0EA5E9" bgcolor="#0EA5E9" />
         <Navbar />
         {children}
       </body>
