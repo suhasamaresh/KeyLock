@@ -240,7 +240,7 @@ const ShareLinkModal: React.FC<ShareLinkModalProps> = ({ url, onClose }) => {
                   className="text-xs text-center pt-2 border-t border-opacity-10 border-gray-600"
                   style={{ color: "#94a1b2" }}
                 >
-                  ⚠️ This link will expire based on your settings. Save it securely!
+                  This link will expire based on your settings. Save it securely!
                 </div>
               </div>
             </div>

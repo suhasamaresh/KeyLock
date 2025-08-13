@@ -4,6 +4,14 @@ import "./globals.css";
 import Navbar from "./components/navbar";
 import CustomCursor from "./components/customcursor";
 import { Oxanium, Merriweather } from "next/font/google";
+import { Fira_Code } from "next/font/google";
+
+const firaCode = Fira_Code({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], 
+  variable: "--font-fira-code", 
+});
+
 
 const oxanium = Oxanium({
   subsets: ["latin"],

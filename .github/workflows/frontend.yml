@@ -1,0 +1,30 @@
+name: Frontend CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "frontend/**"
+      - ".github/workflows/frontend.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "frontend/**"
+      - ".github/workflows/frontend.yml"
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '18'
+            - name: Install Dependencies
+              working-directory: ./frontend
+              run: npm install
+            - name: Build Frontend
+              run: npm run build

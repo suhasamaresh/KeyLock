@@ -10,6 +10,7 @@ import {
 import { ReactNode } from "react";
 import ShareLinkModal from "./ShareLinkModal";
 import { Lock } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const MovingBorder = ({
   children,
@@ -57,6 +58,8 @@ const MovingBorder = ({
     const dy = nextPoint.y - prevPoint.y;
     return Math.atan2(dy, dx) * (180 / Math.PI);
   });
+
+  
 
   const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%) rotate(${rotation}deg)`;
 
@@ -186,9 +189,11 @@ export default function Hero() {
     setShareableUrl("");
   };
 
+  const router = useRouter();
+
   return (
     <div
-      className="min-h-screen"
+      className="min-h-screen relative"
       style={{
         background: `
       linear-gradient(180deg, 
@@ -220,119 +225,68 @@ export default function Hero() {
               </span>
               <br />
               <span className="inline-flex items-center gap-2 font-bold">
-                <span style={{
-                  color: "#F97316",
-                }}>
-                <Lock size={42} className="inline-block align-middle" />
-                <span>Retrieval</span></span>
+                <span
+                  style={{
+                    color: "#F97316",
+                  }}
+                >
+                  <Lock size={42} className="inline-block align-middle" />
+                  <span>Retrieval</span>
+                </span>
                 <span>Flow</span>
               </span>
             </h1>
 
             <p
-              className="text-lg md:text-xl leading-relaxed font-medium max-w-2xl"
+              className="text-lg md:text-xl leading-relaxed font-merriweather max-w-2xl"
               style={{ color: "#A8A29E" }}
             >
-              Experience next-level security—KeyLock encrypts your data with the power and speed of Rust.
+              Experience next-level security—KeyLock encrypts your data with the
+              power and speed of Rust. No Authentication Required!
             </p>
+
+            <motion.button
+            whileHover={{
+              scale: 1.05,
+            }}
+            whileTap={{
+              scale: 0.95,
+            }}
+            onClick={() => router.push("/upload")}
+            className="bg-[#F97316] text-[#F5F5F4] py-3 px-5 rounded-full hover:text-[#44403C]">
+              Get Started
+            </motion.button>
           </div>
 
-          <div className="flex justify-center lg:justify-end cursor-none">
-            <div className="w-full max-w-md">
-              <div
-                className="relative overflow-hidden p-[1px]"
-                style={{ borderRadius: "1.75rem" }}
+          {/* Video Section - Right Side */}
+          <div className="flex justify-center lg:justify-end">
+            <div className="w-full max-w-lg">
+              <div 
+                className="relative aspect-video rounded-2xl overflow-hidden border border-[#44403C] shadow-2xl"
+                style={{
+                  backgroundColor: "rgba(255, 255, 254, 0.05)",
+                }}
               >
-                <div
-                  className="absolute inset-0 bg-[#292524]"
-                  style={{ borderRadius: "calc(1.75rem * 0.96)" }}
-                >
-                  <MovingBorder duration={4000}>
-                    <div
-                      style={{
-                        width: "200px",
-                        height: "8px",
-                        background:
-                          "linear-gradient(90deg, rgba(249,225,22,0) 0%, rgba(249,225,22,0.1) 20%, rgba(249,225,22,0.4) 40%, rgba(249,225#F97316,0.7) 60%, #F5F5F4 80%, #F5F5F4 90%, #F5F5F4 100%)",
-                        filter:
-                          "drop-shadow(0 0 12px #F97316) drop-shadow(0 0 20px #F97316) blur(0.5px)",
-                        borderRadius: "0px",
-                        opacity: 0.95,
-                        boxShadow: "0 0 25px #F97316, 0 0 50px #F97316",
-                        clipPath:
-                          "polygon(0% 50%, 20% 20%, 80% 5%, 100% 0%, 100% 100%, 80% 95%, 20% 80%)",
-                        transformOrigin: "center",
-                      }}
-                    />
-                  </MovingBorder>
-                </div>
-
-                <div
-                  className="relative backdrop-blur-sm p-8 shadow-2xl 
-             h-full w-full border border-[#44403C] cursor-none"
+                <video
+                  src="/keylock.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+                <div 
+                  className="absolute inset-0 pointer-events-none"
                   style={{
-                    backgroundColor: "rgba(255, 255, 254, 0.05)",
-                    borderRadius: "calc(1.75rem * 0.96)",
+                    background: "linear-gradient(45deg, transparent 0%, rgba(249, 115, 22, 0.05) 100%)"
                   }}
-                >
-                  <div className="space-y-6">
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="Input the secret message here"
-                        value={secretMessage}
-                        onChange={(e) => setSecretMessage(e.target.value)}
-                        className="w-full px-4 py-4 rounded-md border border-opacity-20 border-[#44403C] bg-transparent text-white placeholder-gray-400 focus:outline-none focus:border-opacity-50 focus:border-[#F97316] transition-all duration-300 text-lg"
-                        style={{ backgroundColor: "rgba(255, 255, 254, 0.05)" }}
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <input
-                          type="number"
-                          placeholder="Expiry (minutes)"
-                          value={expiryMinutes}
-                          onChange={(e) => setExpiryMinutes(e.target.value)}
-                          className="w-full px-4 py-4 rounded-md border border-opacity-20 border-[#44403C] bg-transparent text-white placeholder-gray-400 focus:outline-none focus:border-opacity-50 focus:border-[#F97316] transition-all duration-300 text-lg"
-                          style={{
-                            backgroundColor: "rgba(255, 255, 254, 0.05)",
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <input
-                          type="number"
-                          placeholder="Max views"
-                          value={maxViews}
-                          onChange={(e) => setMaxViews(e.target.value)}
-                          className="w-full px-4 py-4 rounded-md border border-opacity-20 border-[#44403C] bg-transparent text-white placeholder-gray-400 focus:outline-none focus:border-opacity-50 focus:border-[#F97316] transition-all duration-300 text-lg"
-                          style={{
-                            backgroundColor: "rgba(255, 255, 254, 0.05)",
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <button
-                        onClick={handleGetShareableLink}
-                        disabled={isLoading}
-                        className="w-full py-4 px-6 rounded-md text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl active:scale-95 focus:outline-none focus:ring-4 focus:ring-purple-300 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                        style={{
-                          backgroundColor: "#F97316",
-                          color: "#F5F5F4",
-                        }}
-                      >
-                        {isLoading ? "Creating Link... " : "Get Shareable Link"}
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                />
               </div>
             </div>
           </div>
         </div>
 
+        {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-500 rounded-full opacity-10 blur-3xl"></div>
           <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-blue-500 rounded-full opacity-5 blur-3xl"></div>

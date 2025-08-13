@@ -92,4 +92,5 @@ button{
 @theme inline {
   --font-oxanium: var(--font-oxanium), sans-serif;
   --font-merriweather: 'Merriweather', serif;
+  --font-fira-code: var(--font-fira-code), monospace;
 }
