@@ -37,7 +37,7 @@ pub async fn share_secret(State(state): State<AppState>, Json(payload): Json<Sha
 
     Ok(Json(json!({
         "id":  generated_id,
-        "url": format!("http://localhost:3000/secret/{}",  generated_id),
+        "url": format!("https://keylock-production.up.railway.app/secret/{}",  generated_id),
         "expires_at": exp_at,
         "max_views": payload.max_views.unwrap_or(1)
     })))
