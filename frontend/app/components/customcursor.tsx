@@ -105,6 +105,7 @@ const CustomCursor = ({ stroke, bgcolor }: CustomCursorProps) => {
         opacity: isVisible ? 1 : 0, 
       }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
+      className="hidden md:block"
     >
       <polygon points="7 20 7 4 19 16 12 16 7 21" />
     </motion.svg>
